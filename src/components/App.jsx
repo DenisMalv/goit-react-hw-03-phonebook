@@ -7,7 +7,13 @@ import ContactList from './ContactList/ContactList';
 
 class App extends Component {
   state = {
-    contacts: [],
+    contacts: [
+      {
+        id: '3em',
+        name: 'asdasd',
+        number: '+420122770',
+      },
+    ],
     filter: '',
   };
 
@@ -18,8 +24,10 @@ class App extends Component {
     }
   }
 
-  componentDidUpdate() {
-    localStorage.setItem('contacts', JSON.stringify(this.state.contacts));
+  componentDidUpdate(prevProps, prevState) {
+    if (this.state.contacts !== prevState.contacts) {
+      localStorage.setItem('contacts', JSON.stringify(this.state.contacts));
+    }
   }
 
   checkingAddedContact = outName => {
